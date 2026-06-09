@@ -1,0 +1,70 @@
+---
+import Container from '../Container.astro';
+
+const faqs = [
+  {
+    q: 'What counts as a request?',
+    a: 'Every HTTP request your deployment serves. Responses served from the edge cache count at one-tenth the rate of origin requests, so caching lowers your bill. Health checks from Vega’s own monitoring and requests rejected by your rate-limit rules don’t count toward your total.',
+  },
+  {
+    q: 'What happens when I hit my plan limit?',
+    a: 'Nothing is deleted and nothing fails silently. On Free, requests beyond 100k per month return a 429 until your cycle resets. On Pro, overage is billed at $2 per additional 1M requests, and you can set a hard spend cap in the dashboard. Scale has no request limit.',
+  },
+  {
+    q: 'How does per-seat billing work on Pro?',
+    a: 'A seat is any member of your Vega organization. Seats added mid-cycle are prorated to the day, and seats you remove are credited on your next invoice. Billing-only contacts are free.',
+  },
+  {
+    q: 'Do you offer annual billing?',
+    a: 'Yes. Pro and Scale are 20% cheaper when billed annually — $16 per seat per month and $200 per month respectively. You can switch between monthly and annual at any time from the billing page.',
+  },
+  {
+    q: 'Can I change plans or cancel at any time?',
+    a: 'Yes. Upgrades apply immediately and are prorated. Downgrades and cancellations take effect at the end of the current cycle, and your deployments keep running — Free limits apply afterwards. No cancellation fees, no sales call.',
+  },
+  {
+    q: 'What does the 99.99% uptime SLA on Scale cover?',
+    a: 'Monthly availability of the Vega edge network, measured per region and published on the status page. If we miss it, service credits apply automatically — 10% of the month’s invoice below 99.99%, 25% below 99.9%. You never have to file a claim.',
+  },
+];
+---
+
+<section class="border-t border-line py-20 sm:py-28">
+  <Container>
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
+      <div>
+        <p class="font-mono text-[13px] uppercase tracking-widest text-fg-3">FAQ</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Questions, answered</h2>
+        <p class="mt-4 max-w-md leading-relaxed text-fg-2">
+          The fine print on limits, billing, and what happens when you grow. For anything else,
+          <a
+            href="mailto:support@vega.dev"
+            class="rounded-sm text-fg underline decoration-line-2 underline-offset-4 transition-colors hover:decoration-fg-3 focus-visible:outline-2 focus-visible:outline-brand"
+          >
+            email support</a
+          >.
+        </p>
+      </div>
+
+      <div class="divide-y divide-line border-y border-line">
+        {
+          faqs.map(({ q, a }) => (
+            <details class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 rounded-md py-5 text-left text-sm font-medium text-fg focus-visible:outline-2 focus-visible:outline-brand sm:text-base [&::-webkit-details-marker]:hidden">
+                {q}
+                <span
+                  aria-hidden="true"
+                  class="relative h-4 w-4 shrink-0 text-fg-3 transition-colors group-hover:text-fg-2"
+                >
+                  <span class="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-current" />
+                  <span class="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-current transition-transform duration-200 group-open:rotate-90 group-open:opacity-0" />
+                </span>
+              </summary>
+              <p class="pb-6 pr-10 text-sm leading-relaxed text-fg-2">{a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

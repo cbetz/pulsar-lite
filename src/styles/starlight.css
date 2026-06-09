@@ -1,0 +1,488 @@
+/* ─────────────────────────────────────────────────────────────
+   Pulsar — Starlight theme
+   Makes the docs feel native to the marketing site: ink surfaces,
+   hairline borders, Inter/JetBrains Mono, violet→cyan accents.
+
+   Starlight ships all of its styles inside `@layer starlight.*`,
+   so every unlayered rule in this file wins by cascade design —
+   no `!important` needed.
+   ───────────────────────────────────────────────────────────── */
+
+/* Self-hosted fonts (marketing pages import these in BaseLayout;
+   Starlight pages load them here). */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* Canonical Expressive Code skin, shared with the blog and the
+   changelog (they import it in their page frontmatter). */
+@import './expressive-code.css';
+
+/* ── Tokens (mirrors src/styles/global.css) ─────────────────── */
+
+:root {
+  --pulsar-ink: #0a0a0f;
+  --pulsar-ink-2: #0e0e16;
+  --pulsar-panel: #13131d;
+  --pulsar-panel-2: #181826;
+  --pulsar-line: rgb(255 255 255 / 0.08);
+  --pulsar-line-2: rgb(255 255 255 / 0.14);
+  --pulsar-fg: #f5f5f8;
+  --pulsar-fg-2: #a0a0b4;
+  --pulsar-fg-3: #82829a;
+  --pulsar-brand: #8b5cf6;
+  --pulsar-brand-bright: #a78bfa;
+  --pulsar-accent: #22d3ee;
+  --pulsar-accent-bright: #67e8f9;
+  --pulsar-font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --pulsar-font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', monospace;
+
+  /* Canonical token names consumed by the shared Expressive Code
+     skin (expressive-code.css). Marketing pages get these from the
+     Tailwind @theme in global.css; docs pages alias them here. */
+  --color-ink: var(--pulsar-ink);
+  --color-panel: var(--pulsar-panel);
+  --color-panel-2: var(--pulsar-panel-2);
+  --color-line: var(--pulsar-line);
+  --color-line-2: var(--pulsar-line-2);
+  --color-fg: var(--pulsar-fg);
+  --color-fg-2: var(--pulsar-fg-2);
+  --color-fg-3: var(--pulsar-fg-3);
+  --color-brand: var(--pulsar-brand);
+  --color-accent: var(--pulsar-accent);
+  --font-mono: var(--pulsar-font-mono);
+}
+
+/* ── Palette — dark only, forced for every data-theme ───────── */
+/* The docs are dark-only like the marketing site, so the palette
+   is declared on :root (not :root[data-theme='dark']) and the
+   theme switcher is hidden below. */
+
+:root,
+::backdrop {
+  color-scheme: dark;
+
+  --sl-color-white: var(--pulsar-fg);
+  --sl-color-gray-1: #e8e8ee;
+  --sl-color-gray-2: var(--pulsar-fg-2);
+  --sl-color-gray-3: var(--pulsar-fg-3);
+  --sl-color-gray-4: #44445a;
+  --sl-color-gray-5: #23232f;
+  --sl-color-gray-6: var(--pulsar-panel);
+  --sl-color-gray-7: var(--pulsar-ink-2);
+  --sl-color-black: var(--pulsar-ink);
+
+  --sl-color-accent-low: #2a1d57;
+  --sl-color-accent: var(--pulsar-brand);
+  --sl-color-accent-high: #c4b5fd;
+
+  --sl-color-text: var(--pulsar-fg-2);
+  --sl-color-text-accent: var(--pulsar-brand-bright);
+  --sl-color-text-invert: var(--pulsar-ink);
+  --sl-color-bg: var(--pulsar-ink);
+  --sl-color-bg-nav: rgb(10 10 15 / 0.7);
+  --sl-color-bg-sidebar: var(--pulsar-ink-2);
+  --sl-color-bg-inline-code: rgb(255 255 255 / 0.06);
+  --sl-color-bg-accent: var(--pulsar-brand);
+  --sl-color-hairline: var(--pulsar-line);
+  --sl-color-hairline-light: var(--pulsar-line);
+  --sl-color-hairline-shade: var(--pulsar-line);
+  --sl-color-backdrop-overlay: rgb(10 10 15 / 0.65);
+
+  /* Hairline borders carry the depth; kill the heavy shadows. */
+  --sl-shadow-sm: 0 0 0 0 transparent;
+  --sl-shadow-md: 0 0 0 0 transparent;
+  --sl-shadow-lg: 0 24px 80px rgb(0 0 0 / 0.55);
+
+  /* Type */
+  --sl-font: var(--pulsar-font-sans);
+  --sl-font-mono: var(--pulsar-font-mono);
+  --sl-text-body-sm: 0.875rem;
+  --sl-text-code: 0.8125rem;
+  --sl-text-code-sm: 0.75rem;
+  --sl-text-h1: 2.25rem;
+  --sl-text-h2: 1.5rem;
+  --sl-text-h3: 1.1875rem;
+  --sl-text-h4: 1.0625rem;
+  --sl-text-h5: 1rem;
+
+  /* Layout */
+  --sl-sidebar-width: 17rem;
+}
+
+/* Dark only: no theme switching in v1. */
+starlight-theme-select {
+  display: none;
+}
+
+::selection {
+  background: rgb(139 92 246 / 0.4);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.page > header.header {
+  background-color: rgb(10 10 15 / 0.7);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--pulsar-line);
+}
+
+.site-title {
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--pulsar-fg);
+}
+
+.site-title span {
+  text-transform: lowercase;
+}
+
+/* Gradient star — the Vega wordmark from the marketing nav. */
+.site-title::before {
+  content: '';
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='24' y2='24' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z' fill='url(%23g)'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.social-icons a {
+  color: var(--pulsar-fg-2);
+}
+
+.social-icons a:hover {
+  color: var(--pulsar-fg);
+}
+
+/* Starlight draws a 2rem divider after the social icons to separate
+   them from the theme select; with the select hidden it's orphaned. */
+.social-icons::after {
+  display: none;
+}
+
+/* ── Search ─────────────────────────────────────────────────── */
+
+site-search button[data-open-modal] {
+  height: 2.25rem;
+  gap: 0.5rem;
+  padding-inline: 0.75rem 0.5rem;
+  border: 1px solid var(--pulsar-line);
+  border-radius: 9999px;
+  background-color: rgb(255 255 255 / 0.03);
+  color: var(--pulsar-fg-3);
+  font-size: 0.8125rem;
+  transition:
+    border-color 150ms,
+    color 150ms,
+    background-color 150ms;
+}
+
+site-search button[data-open-modal]:hover {
+  border-color: var(--pulsar-line-2);
+  color: var(--pulsar-fg-2);
+}
+
+/* Keep the search icon 16px even where the button text scales down. */
+site-search button[data-open-modal] > svg {
+  font-size: 1rem;
+}
+
+site-search button[data-open-modal] > kbd {
+  background: transparent;
+  padding: 0;
+}
+
+site-search button[data-open-modal] kbd kbd {
+  font-family: var(--pulsar-font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--pulsar-fg-3);
+  background-color: rgb(255 255 255 / 0.06);
+  border: 1px solid var(--pulsar-line);
+  border-radius: 0.3125rem;
+  padding: 0.1875rem 0.3125rem;
+}
+
+site-search dialog {
+  background-color: rgb(14 14 22 / 0.92);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--pulsar-line-2);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.55);
+}
+
+site-search dialog::backdrop {
+  background-color: rgb(10 10 15 / 0.65);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+@media (min-width: 50rem) {
+  site-search dialog {
+    border-radius: 0.75rem;
+  }
+}
+
+site-search #starlight__search {
+  --pagefind-ui-font: var(--pulsar-font-sans);
+  --pagefind-ui-primary: var(--pulsar-brand-bright);
+  --pagefind-ui-text: var(--pulsar-fg-2);
+  --pagefind-ui-background: rgb(255 255 255 / 0.04);
+  --pagefind-ui-border: var(--pulsar-line);
+  --pagefind-ui-tag: var(--pulsar-panel-2);
+  --sl-search-corners: 0.5rem;
+}
+
+site-search .pagefind-ui__search-input {
+  font-weight: 400;
+  font-size: 0.9375rem;
+  color: var(--pulsar-fg);
+}
+
+site-search .pagefind-ui__result-link {
+  color: var(--pulsar-fg);
+}
+
+site-search mark {
+  background: transparent;
+  color: var(--pulsar-accent-bright);
+  font-weight: 500;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+
+.sidebar-pane {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.12) transparent;
+}
+
+.sidebar-content .top-level > li + li {
+  margin-top: 1rem;
+}
+
+/* Group labels as mono eyebrows, matching marketing sections. */
+.sidebar-content .group-label .large {
+  font-family: var(--pulsar-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pulsar-fg-3);
+}
+
+.sidebar-content summary .caret {
+  color: var(--pulsar-fg-3);
+}
+
+.sidebar-content a {
+  font-size: 0.875rem;
+  color: var(--pulsar-fg-2);
+  border-radius: 0.5rem;
+  transition:
+    color 120ms,
+    background-color 120ms;
+}
+
+.sidebar-content a:hover {
+  color: var(--pulsar-fg);
+  background-color: rgb(255 255 255 / 0.04);
+}
+
+/* Active item: quiet violet→cyan pill with a hairline ring. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+  color: var(--pulsar-fg);
+  font-weight: 500;
+  background: linear-gradient(90deg, rgb(139 92 246 / 0.18), rgb(34 211 238 / 0.07));
+  box-shadow: inset 0 0 0 1px rgb(139 92 246 / 0.35);
+}
+
+/* ── Table of contents ──────────────────────────────────────── */
+
+#starlight__on-this-page,
+#starlight__on-this-page--mobile {
+  font-family: var(--pulsar-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pulsar-fg-3);
+}
+
+.right-sidebar starlight-toc a {
+  font-size: 0.8125rem;
+  color: var(--pulsar-fg-2);
+  transition: color 120ms;
+}
+
+.right-sidebar starlight-toc a:hover {
+  color: var(--pulsar-fg);
+}
+
+.right-sidebar starlight-toc a[aria-current='true'] {
+  color: var(--pulsar-accent-bright);
+}
+
+mobile-starlight-toc nav {
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+/* One restrained glow at the top of the content viewport. */
+.main-frame {
+  background: radial-gradient(600px 220px at 50% 0%, rgb(139 92 246 / 0.06), transparent 70%);
+}
+
+/* ── Markdown content ───────────────────────────────────────── */
+
+.content-panel h1 {
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.sl-markdown-content {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--pulsar-fg);
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--pulsar-brand-bright);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgb(167 139 250 / 0.35);
+  text-underline-offset: 0.2em;
+  transition:
+    color 120ms,
+    text-decoration-color 120ms;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+  color: var(--pulsar-accent-bright);
+  text-decoration-color: rgb(103 232 249 / 0.5);
+}
+
+.sl-markdown-content code:not(:where(.expressive-code *)) {
+  background-color: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.07);
+  border-radius: 0.3125rem;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+  color: #dcdce6;
+}
+
+.sl-markdown-content table {
+  font-size: 0.875rem;
+}
+
+.sl-markdown-content th {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pulsar-fg);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start: 2px solid var(--pulsar-line-2);
+  color: var(--pulsar-fg-2);
+}
+
+.sl-markdown-content hr {
+  border-color: var(--pulsar-line);
+}
+
+.sl-anchor-link {
+  color: var(--pulsar-fg-3);
+}
+
+.sl-heading-wrapper:hover .sl-anchor-link {
+  color: var(--pulsar-brand-bright);
+}
+
+/* ── Asides ─────────────────────────────────────────────────── */
+
+.starlight-aside {
+  border: 1px solid var(--sl-color-asides-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+.starlight-aside__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.starlight-aside__content {
+  color: var(--pulsar-fg-2);
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: var(--pulsar-accent-bright);
+  --sl-color-asides-border: rgb(34 211 238 / 0.25);
+  background-color: rgb(34 211 238 / 0.05);
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: var(--pulsar-brand-bright);
+  --sl-color-asides-border: rgb(139 92 246 / 0.3);
+  background-color: rgb(139 92 246 / 0.06);
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: #fcd34d;
+  --sl-color-asides-border: rgb(251 191 36 / 0.25);
+  background-color: rgb(251 191 36 / 0.05);
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: #fca5a5;
+  --sl-color-asides-border: rgb(248 113 113 / 0.25);
+  background-color: rgb(248 113 113 / 0.05);
+}
+
+/* ── Code blocks (Expressive Code) ──────────────────────────── */
+/* The full glass-panel skin lives in expressive-code.css
+   (imported at the top of this file) and is shared with the blog
+   and the changelog. Add only genuinely docs-specific overrides
+   here, scoped to .expressive-code. */
+
+/* ── Pagination ─────────────────────────────────────────────── */
+
+.pagination-links a {
+  border: 1px solid var(--pulsar-line);
+  border-radius: 0.75rem;
+  background-color: rgb(255 255 255 / 0.02);
+  box-shadow: none;
+  padding: 1rem 1.25rem;
+  color: var(--pulsar-fg-3);
+  font-size: 0.8125rem;
+  transition:
+    border-color 150ms,
+    background-color 150ms;
+}
+
+.pagination-links a:hover {
+  border-color: var(--pulsar-line-2);
+  background-color: rgb(255 255 255 / 0.04);
+}
+
+.pagination-links a svg {
+  color: var(--pulsar-fg-3);
+}
+
+.pagination-links .link-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--pulsar-fg);
+}

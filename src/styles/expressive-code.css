@@ -1,0 +1,95 @@
+/* ─────────────────────────────────────────────────────────────
+   Pulsar — canonical Expressive Code skin
+   One glass-panel re-skin for every fenced code block: docs
+   (imported by starlight.css), blog posts and the changelog
+   (imported in their page frontmatter).
+
+   EC compiles its single catppuccin-mocha theme into variables on
+   `:root` (see the generated ec.*.css); declaring the same
+   variables on `.expressive-code` wins by inheritance proximity,
+   so no `!important` and no load-order dependency.
+
+   Tokens: marketing pages get `--color-*` / `--font-*` from
+   global.css (@theme); docs pages alias them in starlight.css.
+   Variable names verified against the generated ec.*.css (EC 0.43).
+   ───────────────────────────────────────────────────────────── */
+
+.expressive-code {
+  /* Frame: hairline border, rounded-xl, no drop shadow */
+  --ec-brdWd: 1px;
+  --ec-brdCol: var(--color-line);
+  --ec-brdRad: 0.6875rem; /* + 1px border = 0.75rem outer, rounded-xl */
+  --ec-frm-shdCol: transparent;
+  --ec-frm-frameBoxShdCssVal: none;
+
+  /* Type: JetBrains Mono for code AND frame UI (tabs/titles are labels) */
+  --ec-codeFontFml: var(--font-mono);
+  --ec-codeFontSize: 0.8125rem;
+  --ec-codeLineHt: 1.7;
+  --ec-uiFontFml: var(--font-mono);
+  --ec-uiFontSize: 0.75rem;
+
+  /* Code surface: translucent white-over-ink glass */
+  --ec-codeBg: rgb(255 255 255 / 0.03);
+  --ec-codeFg: var(--color-fg-2);
+  --ec-codePadBlk: 1rem;
+  --ec-codePadInl: 1.25rem;
+  --ec-codeSelBg: rgb(139 92 246 / 0.4);
+  --ec-gtrFg: var(--color-fg-3);
+  --ec-gtrBrdCol: var(--color-line);
+
+  /* UI selection, focus, scrollbar */
+  --ec-uiSelBg: rgb(139 92 246 / 0.4);
+  --ec-uiSelFg: var(--color-fg);
+  --ec-focusBrd: var(--color-brand);
+  --ec-sbThumbCol: rgb(255 255 255 / 0.12);
+  --ec-sbThumbHoverCol: rgb(255 255 255 / 0.25);
+
+  /* Editor frames: hairline tab bar, violet indicator on the active tab */
+  --ec-frm-edBg: rgb(255 255 255 / 0.03);
+  --ec-frm-edTabBarBg: rgb(255 255 255 / 0.02);
+  --ec-frm-edTabBarBrdCol: var(--color-line);
+  --ec-frm-edTabBarBrdBtmCol: var(--color-line);
+  --ec-frm-edActTabBg: rgb(255 255 255 / 0.04);
+  --ec-frm-edActTabFg: var(--color-fg);
+  --ec-frm-edActTabBrdCol: var(--color-line);
+  --ec-frm-edActTabIndHt: 1.5px;
+  --ec-frm-edActTabIndTopCol: var(--color-brand);
+  --ec-frm-edActTabIndBtmCol: transparent;
+
+  /* Terminal frames */
+  --ec-frm-trmBg: rgb(255 255 255 / 0.03);
+  --ec-frm-trmTtbBg: rgb(255 255 255 / 0.02);
+  --ec-frm-trmTtbBrdBtmCol: var(--color-line);
+  --ec-frm-trmTtbFg: var(--color-fg-3);
+  --ec-frm-trmTtbDotsFg: var(--color-fg-3);
+  --ec-frm-trmTtbDotsOpa: 0.6;
+
+  /* Copy button + "Copied" feedback */
+  --ec-frm-inlBtnBg: var(--color-panel-2);
+  --ec-frm-inlBtnFg: var(--color-fg-2);
+  --ec-frm-inlBtnBrd: var(--color-line-2);
+  --ec-frm-tooltipSuccessBg: var(--color-accent);
+  --ec-frm-tooltipSuccessFg: var(--color-ink);
+
+  /* Text markers (mark/ins/del) */
+  --ec-tm-markBg: rgb(139 92 246 / 0.13);
+  --ec-tm-markBrdCol: rgb(139 92 246 / 0.5);
+  --ec-tm-insBg: rgb(34 211 238 / 0.1);
+  --ec-tm-insBrdCol: rgb(34 211 238 / 0.4);
+  --ec-tm-delBg: rgb(248 113 113 / 0.1);
+  --ec-tm-delBrdCol: rgb(248 113 113 / 0.4);
+}
+
+/* Glass treatment: blur whatever sits behind the translucent panel */
+.expressive-code pre {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Solid backing so the copy button stays legible over code.
+   `.frame .copy` beats EC's own `.copy button` rule (0,2,1)
+   regardless of stylesheet order. */
+.expressive-code .frame .copy button {
+  background: var(--color-panel);
+}

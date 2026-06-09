@@ -1,0 +1,36 @@
+name: Weekly build tripwire
+
+# Rebuilds against the LATEST releases of every dependency once a week.
+# Starlight ships breaking 0.x minors several times a year — a red run here
+# is the early warning to ship a compatibility update before buyers hit it.
+on:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  build-latest-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: pnpm update --latest
+      - run: pnpm build
+
+  build-locked-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
