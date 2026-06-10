@@ -46,13 +46,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
-    <script>
-      // Expressive Code marks scrollable code blocks role="region" without a
-      // name; unnamed duplicate landmarks fail axe and confuse screen readers.
-      for (const pre of document.querySelectorAll('pre[role="region"]:not([aria-label])')) {
-        const lang = (pre as HTMLElement).dataset.language;
-        pre.setAttribute('aria-label', lang ? `Code sample (${lang})` : 'Code sample');
-      }
-    </script>
   </body>
 </html>

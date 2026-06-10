@@ -5,7 +5,6 @@ import Container from '../../components/Container.astro';
 import Glow from '../../components/Glow.astro';
 import Avatar from '../../components/blog/Avatar.astro';
 import TagPill from '../../components/blog/TagPill.astro';
-import '../../styles/expressive-code.css';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -205,11 +204,12 @@ const readingTime = Math.max(1, Math.round(words / 220));
     box-decoration-break: clone;
   }
 
-  /* Fenced code blocks — glass panel treatment.
-     Fallback for plain Shiki output (no Expressive Code).
-     `background` is !important to win over the global
-     `.astro-code { background-color: transparent !important }`. */
-  .prose pre:not([data-language]) {
+  /* Fenced code blocks — glass panel treatment, matching the hero
+     code panel (src/components/home/Hero.astro). Markdown fences
+     render through Astro's built-in Shiki (theme set in
+     astro.config.mjs); `background` is !important to win over the
+     global `.astro-code { background-color: transparent !important }`. */
+  .prose pre {
     background: rgb(255 255 255 / 0.03) !important;
     border: 1px solid var(--color-line);
     border-radius: 0.75rem;
@@ -219,7 +219,7 @@ const readingTime = Math.max(1, Math.round(words / 220));
     -webkit-backdrop-filter: blur(12px);
   }
 
-  .prose pre:not([data-language]) code {
+  .prose pre code {
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -228,10 +228,6 @@ const readingTime = Math.max(1, Math.round(words / 220));
     line-height: 1.7;
     color: inherit;
   }
-
-  /* Fenced code renders through Expressive Code; the shared glass
-     skin (frame, copy button, backdrop blur) is imported from
-     src/styles/expressive-code.css in the frontmatter. */
 
   /* Lists (preflight strips list styles; restore them) */
   .prose ul,

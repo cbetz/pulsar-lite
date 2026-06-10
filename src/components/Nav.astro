@@ -3,12 +3,7 @@ import Button from './Button.astro';
 import Container from './Container.astro';
 import Logo from './Logo.astro';
 
-const links = [
-  { label: 'Docs', href: '/docs/getting-started/quickstart/' },
-  { label: 'Pricing', href: '/pricing/' },
-  { label: 'Changelog', href: '/changelog/' },
-  { label: 'Blog', href: '/blog/' },
-];
+const links = [{ label: 'Blog', href: '/blog/' }];
 const current = Astro.url.pathname;
 ---
 
@@ -39,7 +34,7 @@ const current = Astro.url.pathname;
 
       <div class="flex items-center gap-3">
         <a
-          href="https://github.com"
+          href="https://github.com/cbetz/pulsar-lite"
           class="hidden text-fg-2 transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:block"
           aria-label="GitHub"
         >
@@ -49,10 +44,9 @@ const current = Astro.url.pathname;
             ></path>
           </svg>
         </a>
-        <Button href="#" variant="secondary" size="sm" class="max-sm:hidden">
-          Sign in
+        <Button href="/blog/vega-2-0-edge-caching-ga/" variant="primary" size="sm">
+          Get started
         </Button>
-        <Button href="/pricing/" variant="primary" size="sm">Get started</Button>
         <button
           type="button"
           data-menu-button
@@ -118,10 +112,10 @@ const current = Astro.url.pathname;
       </ul>
       <div class="mt-2 border-t border-line pt-2">
         <a
-          href="#"
+          href="https://github.com/cbetz/pulsar-lite"
           class="flex min-h-11 items-center rounded-lg px-2 text-sm text-fg-2 transition-colors hover:text-fg focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand"
         >
-          Sign in
+          GitHub
         </a>
       </div>
     </Container>

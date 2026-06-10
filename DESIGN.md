@@ -1,10 +1,10 @@
-# Pulsar — Design Contract
+# Pulsar Lite — Design Contract
 
-Pulsar is a premium Astro theme for devtool/API companies, sold at $39. The demo brand is **Vega**, a fictional API platform. Every page must look like one designer made it. **Quality bar: Tailwind Plus "Protocol". Every screenshot must visibly beat the free ScrewFast theme.**
+Pulsar Lite is the free, MIT-licensed variant of [Pulsar](https://cometthemes.lemonsqueezy.com/checkout/buy/cc506d0c-a002-4803-ae0c-076b8de1a479), an Astro theme for devtool/API companies: landing page + blog. The demo brand is **Vega**, a fictional API platform. Every page must look like one designer made it. **Quality bar: Tailwind Plus "Protocol". Every screenshot must visibly beat the free ScrewFast theme.**
 
 ## Stack
 
-Astro 6.4 + Tailwind CSS 4.3 (via `@tailwindcss/vite`) + Starlight 0.40 (docs). Zero UI frameworks — `.astro` components only, no React/Vue/client JS unless truly needed (then vanilla `<script>`). Fonts are self-hosted via `@fontsource-variable/inter` and `@fontsource-variable/jetbrains-mono`, already imported in `BaseLayout.astro`.
+Astro 6.4 + Tailwind CSS 4.3 (via `@tailwindcss/vite`). Zero UI frameworks — `.astro` components only, no React/Vue/client JS unless truly needed (then vanilla `<script>`). Fonts are self-hosted via `@fontsource-variable/inter` and `@fontsource-variable/jetbrains-mono`, already imported in `BaseLayout.astro`.
 
 **Never add dependencies or touch `package.json`/`pnpm-lock.yaml`.**
 
@@ -31,7 +31,7 @@ Utilities: `text-gradient` (violet→cyan clipped text — use on ONE word/phras
 - `Button.astro` — `variant`: primary (gradient), secondary (panel), ghost; `size`: sm/md/lg. Never hand-roll buttons.
 - `Glow.astro` — decorative radial glow, absolutely positioned (parent needs `relative overflow-hidden`). Use at most one or two per page.
 - `Logo.astro`, `Nav.astro`, `Footer.astro`, `layouts/BaseLayout.astro` (props: `title`, `description`).
-- Code highlighting: `import { Code } from 'astro:components'` + `import codeTheme from '@shikijs/themes/catppuccin-mocha'`, then `<Code code={...} lang="ts" theme={codeTheme} />`. `.astro-code` background is already transparent — wrap in a `glass` panel. See `home/Hero.astro` for the canonical pattern.
+- Code highlighting: `import { Code } from 'astro:components'` + `import codeTheme from '@shikijs/themes/catppuccin-mocha'`, then `<Code code={...} lang="ts" theme={codeTheme} />`. `.astro-code` background is already transparent — wrap in a `glass` panel. See `home/Hero.astro` for the canonical pattern. Markdown fences (blog posts) render through Astro's built-in Shiki with the same theme (`markdown.shikiConfig` in `astro.config.mjs`) and get the glass treatment from the `.prose pre` rules in `pages/blog/[slug].astro`.
 
 ## Visual language
 

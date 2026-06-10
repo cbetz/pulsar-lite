@@ -1,8 +1,8 @@
 name: Weekly build tripwire
 
 # Rebuilds against the LATEST releases of every dependency once a week.
-# Starlight ships breaking 0.x minors several times a year — a red run here
-# is the early warning to ship a compatibility update before buyers hit it.
+# A red run here is the early warning to ship a compatibility update
+# before users hit it.
 on:
   schedule:
     - cron: '17 9 * * 1'

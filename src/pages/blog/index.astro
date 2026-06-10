@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
 import Container from '../../components/Container.astro';
 import Glow from '../../components/Glow.astro';
 import Avatar from '../../components/blog/Avatar.astro';
@@ -101,6 +102,27 @@ const featuredDate = featured.data.pubDate.toLocaleDateString('en-US', {
           </div>
         )
       }
+
+      <aside
+        aria-label="Upgrade to Pulsar"
+        class="glass mt-16 flex flex-col items-start justify-between gap-5 rounded-xl p-6 sm:flex-row sm:items-center sm:p-7"
+      >
+        <div>
+          <p class="text-sm font-medium text-fg">Need docs, changelog, and pricing pages?</p>
+          <p class="mt-1.5 max-w-md text-sm leading-relaxed text-fg-2">
+            Pulsar — the full theme — adds restyled Starlight docs, a pricing page, and a
+            changelog to everything in Lite. $39, with 12 months of updates.
+          </p>
+        </div>
+        <Button
+          href="https://cometthemes.lemonsqueezy.com/checkout/buy/cc506d0c-a002-4803-ae0c-076b8de1a479"
+          variant="secondary"
+          size="sm"
+          class="shrink-0"
+        >
+          Get Pulsar
+        </Button>
+      </aside>
     </Container>
   </section>
 </BaseLayout>

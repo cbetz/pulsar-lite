@@ -1,27 +1,21 @@
-Pulsar Theme License
+MIT License
 
-Copyright (c) 2026 Comet — themes for Astro
+Copyright (c) 2026 Comet
 
-Each purchase grants one individual or organization a non-exclusive,
-non-transferable license to:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. Use the theme to build unlimited end products (websites) for yourself
-   or for clients.
-2. Modify the theme freely for those end products.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-You may not:
-
-1. Redistribute, resell, sublicense, or share the theme's source code,
-   in original or modified form, as a theme, template, starter kit, or
-   any product where the theme itself is the value being distributed.
-2. Publish the theme's source in a public repository.
-
-End products built with the theme may of course be open about being
-built with it; the restriction covers the theme source, not your site.
-
-Updates are included for the current Astro major version plus 12 months
-from the date of purchase.
-
-THE THEME IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES
-OR OTHER LIABILITY ARISING FROM THE USE OF THE THEME.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

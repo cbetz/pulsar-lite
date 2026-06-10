@@ -59,7 +59,7 @@ npm install @vega/sdk@2
 vega deploy
 ```
 
-Add `cache.swr` to one hot, read-heavy route — your feed, your product page, your config endpoint — and watch the route's origin traffic in the dashboard. Most teams see the offload curve flatten within minutes. The [caching guide](/docs/guides/edge-caching/) covers key design, vary rules, and the invalidation patterns we recommend for multi-tenant apps.
+Add `cache.swr` to one hot, read-heavy route — your feed, your product page, your config endpoint — and watch the route's origin traffic in the dashboard. Most teams see the offload curve flatten within minutes. Start with an explicit vary allowlist and one tag per tenant — the key-design patterns that held up best across 1,900 beta teams.
 
 ## Thank you, beta testers
 
