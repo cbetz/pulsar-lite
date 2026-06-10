@@ -14,6 +14,7 @@ const {
   description = 'Vega is the API platform for teams that ship — build, deploy, and observe APIs without the infrastructure tax.',
 } = Astro.props;
 
+const is404 = Astro.url.pathname.replace(/\/$/, '') === '/404';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -26,11 +27,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    {!is404 && <link rel="canonical" href={canonicalURL} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
+    {!is404 && <meta property="og:url" content={canonicalURL} />}
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
