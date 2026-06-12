@@ -36,7 +36,7 @@ Requires Node 22.12+.
 
 ## Lite vs Pulsar
 
-| | Pulsar Lite (this repo) | [Pulsar — $39](https://cometthemes.lemonsqueezy.com/checkout/buy/cc506d0c-a002-4803-ae0c-076b8de1a479) |
+| | Pulsar Lite (this repo) | [Pulsar — $39](https://buy.cometthemes.com) |
 |---|---|---|
 | Landing page | ✓ | ✓ |
 | Blog | ✓ | ✓ |
